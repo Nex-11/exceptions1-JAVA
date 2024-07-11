@@ -44,10 +44,19 @@ public class Reservation {
 	}
 	
 	// METODO PARA DAR UPDATE AS DATAS
-	public void updateDates(Date checkIn, Date checkOut) {
+	public String updateDates(Date checkIn, Date checkOut) {
+		// COLOCADA A EXCEÇÃO NO METODO "updateDates" NA CLASSE "Reservation"
+		Date now = new Date();
+		if(checkIn.before(now) || checkOut.before(now)) {
+			return "Error in Reservation: Check-out date must be after check-in date.";
+		}
+		if (!checkOut.after(checkIn)){
+			return "Error in Reservation: Check-out date must be after check-in date.";		
+		}
 		// PASSAR OS VALORES PASSADOS POR ARGUMENTO PARA OS PARAMETROS DO OBJETO
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
+		return null;
 		}
 	
 	@Override

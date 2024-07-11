@@ -18,7 +18,7 @@ public class Program {
 		Date checkIn = sdf.parse(sc.next());
 		System.out.print("Check-out date (dd/mm/yyyy): ");
 		Date checkOut = sdf.parse(sc.next());
-		
+		// NÃO É POSSÍVEL TIRAR DAQUI ESTA EXCEÇÃO POIS TERIA QUE SER FEITO NO METODO CONSTRUTOR E O MESMO NÃO PODE RETORNAR UMA STRING
 		if (!checkOut.after(checkIn)) {
 			System.out.println("Error in Reservation: Check-out date must be after check-in date.");
 		}
@@ -32,23 +32,13 @@ public class Program {
 			checkIn = sdf.parse(sc.next());
 			System.out.print("Check-out date (dd/mm/yyyy): ");
 			checkOut = sdf.parse(sc.next());
-			
-			
-			Date now = new Date();
-			if(checkIn.before(now) || checkOut.before(now)) {
-				System.out.println("Error in Reservation: Check-out date must be after check-in date.");
-			}
-			else if (!checkOut.after(checkIn)){
-				System.out.println("Error in Reservation: Check-out date must be after check-in date.");		
+			String error = reservation.updateDates(checkIn, checkOut);
+			if (error != null) {
+				System.out.println("Error in reservation: " + error);
 			}
 			else {
-				reservation.updateDates(checkIn, checkOut);
-				System.out.println("Reservation: " + reservation);
+			System.out.println("Reservation: " + reservation);
 			}
-			
-			
-			
-			
 		}
 		
 		
